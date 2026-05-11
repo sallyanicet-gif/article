@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La Ville Mode d'Emploi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #FAFAFA;
+      color: #1A1A1A;
+      font-family: 'Lora', Georgia, serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       CONTENEUR PAGE
+       max-width: 1200px · padding: 0 24px
+    ============================================================ */
+    .page-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ============================================================
+       HEADER DU MÉDIA
+    ============================================================ */
+    .site-header {
+      border-bottom: 1px solid #E0E0E0;
+      padding: 16px 0;
+      margin-bottom: 0;
+    }
+
+    .site-header__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .site-logo {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1A1A1A;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .site-tagline {
+      font-size: 12px;
+      font-weight: 400;
+      color: #888888;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       ARTICLE WRAPPER
+       max-width: 720px · margin: 0 auto
+    ============================================================ */
+    .article-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 40px 0 64px;
+    }
+
+    /* ============================================================
+       RUBRIQUE — variante pill
+    ============================================================ */
+    .rubrique {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #FFFFFF;
+      background-color: #1A1A1A;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      text-decoration: none;
+    }
+
+    .rubrique--transport {
+      background-color: #0057B8;
+    }
+
+    .rubrique--logement {
+      background-color: #2D7A3A;
+    }
+
+    /* ============================================================
+       TYPOGRAPHIE — HIÉRARCHIE
+    ============================================================ */
+
+    /* H1 — 32px · 700 · lh 1.15 */
+    .article-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: #111111;
+      margin-bottom: 16px;
+    }
+
+    /* Chapeau / lead — 17px · 400i · lh 1.6 */
+    .article-lead {
+      font-size: 17px;
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.6;
+      color: #4A4A4A;
+      border-left: 3px solid #CC0000;
+      padding-left: 16px;
+      margin-bottom: 20px;
+    }
+
+    /* Méta-ligne */
+    .meta-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #E0E0E0;
+    }
+
+    .meta-line__left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .meta-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #D0D0D0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FAFAFA;
+      flex-shrink: 0;
+    }
+
+    .meta-avatar--transport { background-color: #0057B8; }
+    .meta-avatar--logement  { background-color: #2D7A3A; }
+
+    .meta-author {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1A1A1A;
+      text-decoration: none;
+    }
+
+    .meta-author:hover { text-decoration: underline; }
+
+    .meta-details {
+      font-size: 12px;
+      font-weight: 400;
+      color: #888888;
+      margin-top: 2px;
+    }
+
+    /* Bouton pill "Lire plus tard" */
+    .btn-pill {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1A1A1A;
+      border: 1px solid #CCCCCC;
+      border-radius: 999px;
+      padding: 6px 16px;
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s, color 0.2s;
+      font-family: 'Lora', Georgia, serif;
+    }
+
+    .btn-pill:hover {
+      background: #1A1A1A;
+      color: #FAFAFA;
+    }
+
+    /* ============================================================
+       IMAGE HERO
+       Ratio 16:9 · pleine colonne · border-radius 8px
+    ============================================================ */
+    .hero-image-wrapper {
+      width: 100%;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Légende photo — 11px · italique · tertiaire */
+    .image-caption {
+      font-size: 11px;
+      font-style: italic;
+      color: #888888;
+      margin-top: 8px;
+      margin-bottom: 32px;
+    }
+
+    /* ============================================================
+       CORPS DU TEXTE
+       max-width: 660px · padding 0 16px
+    ============================================================ */
+    .article-body {
+      max-width: 660px;
+      margin: 0 auto;
+    }
+
+    /* H2 — 24px · 700 · lh 1.25 */
+    .article-body h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #111111;
+      margin-top: 40px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    /* Paragraphes — 16px · 400 · lh 1.75 */
+    .article-body p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.75;
+      color: #1A1A1A;
+      margin-bottom: 16px;
+    }
+
+    /* Listes */
+    .article-body ul {
+      margin: 0 0 16px 0;
+      padding-left: 24px;
+      list-style: disc;
+    }
+
+    .article-body ul li {
+      font-size: 16px;
+      line-height: 1.75;
+      color: #1A1A1A;
+      margin-bottom: 6px;
+    }
+
+    .article-body ul li strong {
+      font-weight: 700;
+    }
+
+    /* ============================================================
+       ENCADRÉ CHIFFRES CLÉS
+    ============================================================ */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid #E0E0E0;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 32px 0;
+    }
+
+    .stat-item {
+      padding: 20px 16px;
+      border-right: 1px solid #E0E0E0;
+      text-align: left;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #111111;
+      line-height: 1.1;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 400;
+      color: #888888;
+      line-height: 1.4;
+    }
+
+    /* ============================================================
+       HYPERLIEN INTERNE — ENCADRÉ DE RENVOI
+    ============================================================ */
+    .crosslink-block {
+      border-left: 3px solid #CC0000;
+      background-color: #F8F8F8;
+      padding: 16px 20px;
+      margin: 40px 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .crosslink-block p {
+      font-size: 15px;
+      font-style: italic;
+      color: #4A4A4A;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .crosslink-block a {
+      color: #0057B8;
+      font-weight: 600;
+      font-style: normal;
+      text-decoration: none;
+    }
+
+    .crosslink-block a:hover {
+      text-decoration: underline;
+    }
+
+    /* ============================================================
+       ENCADRÉ MOTS-CLÉS / SOURCES
+    ============================================================ */
+    .seo-block {
+      background-color: #F2F2F2;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-top: 40px;
+    }
+
+    .seo-block__label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888888;
+      margin-bottom: 6px;
+    }
+
+    .seo-block__main {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 4px;
+    }
+
+    .seo-block__tags {
+      font-size: 13px;
+      font-weight: 400;
+      color: #888888;
+    }
+
+    /* Sources */
+    .sources {
+      font-size: 11px;
+      font-style: italic;
+      color: #888888;
+      margin-top: 24px;
+      line-height: 1.6;
+    }
+
+    /* ============================================================
+       SÉPARATEUR ENTRE ARTICLES
+    ============================================================ */
+    .article-separator {
+      max-width: 720px;
+      margin: 0 auto;
+      border: none;
+      border-top: 2px solid #1A1A1A;
+      margin-bottom: 0;
+    }
+
+    /* ============================================================
+       NAVIGATION ENTRE ARTICLES (footer article)
+    ============================================================ */
+    .article-nav {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      padding: 24px 0 40px;
+    }
+
+    .article-nav a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0057B8;
+      text-decoration: none;
+      border: 1px solid #0057B8;
+      border-radius: 999px;
+      padding: 8px 20px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .article-nav a:hover {
+      background: #0057B8;
+      color: #FFFFFF;
+    }
+
+    .article-nav--prev {
+      justify-content: flex-start;
+    }
+
+    /* ============================================================
+       FOOTER DU SITE
+    ============================================================ */
+    .site-footer {
+      border-top: 1px solid #E0E0E0;
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    .site-footer p {
+      font-size: 12px;
+      color: #888888;
+    }
+
+    /* ============================================================
+       RESPONSIVE MOBILE (< 640px)
+    ============================================================ */
+    @media (max-width: 640px) {
+      .article-title {
+        font-size: 24px;
+      }
+
+      .article-lead {
+        font-size: 15px;
+      }
+
+      .article-body p,
+      .article-body ul li {
+        font-size: 15px;
+      }
+
+      .page-container,
+      .site-header__inner {
+        padding: 0 16px;
+      }
+
+      .article-wrapper {
+        padding: 24px 0 48px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-item:nth-child(2) {
+        border-right: none;
+      }
+
+      .stat-item:nth-child(1),
+      .stat-item:nth-child(2) {
+        border-bottom: 1px solid #E0E0E0;
+      }
+
+      .meta-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .site-tagline {
+        display: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       HEADER DU MÉDIA
+  ============================================================ -->
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-logo">La Ville Mode d'Emploi</a>
+      <span class="site-tagline">Guide pratique pour jeunes actifs en ville</span>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       ARTICLE 1 — TRANSPORT
+       /transport/covoiturage-domicile-travail
+  ============================================================ -->
+  <main>
+    <div class="page-container">
+      <article id="article-transport" class="article-wrapper">
+
+        <!-- Rubrique -->
+        <a href="#" class="rubrique rubrique--transport">Transport</a>
+
+        <!-- H1 -->
+        <h1 class="article-title">
+          Covoiturage domicile-travail : économisez jusqu'à 150&nbsp;€ par mois
+        </h1>
+
+        <!-- Chapeau -->
+        <p class="article-lead">
+          Tu fais la route seul chaque matin ? 70&nbsp;% des trajets se font encore en voiture individuelle.
+          Partager ton trajet peut te faire économiser jusqu'à 2&nbsp;000&nbsp;€ par an. Voici comment ça
+          marche et comment te lancer dès cette semaine.
+        </p>
+
+        <!-- Méta-ligne -->
+        <div class="meta-line">
+          <div class="meta-line__left">
+            <div class="meta-avatar meta-avatar--transport">L</div>
+            <div>
+              <a href="#" class="meta-author">Lucas Bernard</a>
+              <div class="meta-details">
+                <time datetime="2025-05-14">14 mai 2025</time>
+                &nbsp;·&nbsp; 4 min de lecture
+              </div>
+            </div>
+          </div>
+          <button class="btn-pill">🔖 Lire plus tard</button>
+        </div>
+
+        <!-- Image hero -->
+        <div class="hero-image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&q=80"
+            alt="Deux personnes partageant un trajet en voiture sur une route de ville au lever du soleil"
+            class="hero-image"
+            width="1200"
+            height="675"
+          >
+        </div>
+        <p class="image-caption">
+          Photo&nbsp;: Jeshoots.com / Unsplash — Des actifs qui covoiturent chaque matin économisent jusqu'à 2&nbsp;000&nbsp;€ par an.
+        </p>
+
+        <!-- Corps de l'article -->
+        <div class="article-body">
+
+          <!-- Chiffres clés -->
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-number">70&nbsp;%</span>
+              <span class="stat-label">des actifs roulent seuls au travail</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">2&nbsp;000&nbsp;€</span>
+              <span class="stat-label">économisés/an pour 30&nbsp;km de trajet</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">31&nbsp;%</span>
+              <span class="stat-label">des actifs pratiquent déjà le covoiturage</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">900&nbsp;000</span>
+              <span class="stat-label">covoitureurs quotidiens en France</span>
+            </div>
+          </div>
+
+          <!-- Section 1 -->
+          <h2>Calcule ce que tu perds à rouler seul</h2>
+
+          <p>
+            Une voiture coûte entre <strong>5&nbsp;000 et 6&nbsp;000&nbsp;€ par an</strong> en moyenne. En covoiturant,
+            tu divises la note par deux. Ça te fait économiser <strong>1&nbsp;000 à 1&nbsp;500&nbsp;€ par an</strong>.
+            Sur un mois, c'est facilement <strong>83 à 125&nbsp;€</strong>. Si ton trajet dépasse 30&nbsp;km,
+            tu peux atteindre <strong>150&nbsp;€ de moins chaque mois</strong>. C'est ton abonnement de streaming,
+            ta salle de sport et tes sorties du week-end.
+          </p>
+
+          <!-- Section 2 -->
+          <h2>Commence avec BlaBlaCar Daily en 3 étapes</h2>
+
+          <ul>
+            <li>Télécharge <strong>BlaBlaCar Daily</strong></li>
+            <li>Indique ton adresse et celle de ton travail, ainsi que tes horaires</li>
+            <li>
+              L'appli te propose des conducteurs ou passagers sur ton itinéraire.
+              Dès ton premier trajet validé, tu rejoins 900&nbsp;000 personnes qui
+              covoiturent chaque jour en France
+            </li>
+          </ul>
+
+          <p>
+            Côté conducteur, chaque passager contribue aux frais. Tu récupères de l'argent
+            sur un trajet que tu ferais de toute façon. Côté passager, tu paies moins
+            qu'un abonnement de transport, sans les galères des retards.
+          </p>
+
+          <!-- Section 3 -->
+          <h2>Vérifie si ton employeur participe</h2>
+
+          <p>
+            Depuis 2020, ton employeur peut te donner <strong>jusqu'à 800&nbsp;€ par an</strong>.
+            Cet argent est <em>exonéré d'impôt</em> et concerne tes trajets en covoiturage.
+            Renseigne-toi auprès de ton service RH. Beaucoup d'entreprises ont mis ce
+            dispositif en place sans le communiquer. <em>C'est de l'argent gratuit que tu
+            laisses sur la table.</em>
+          </p>
+
+          <!-- Hyperlien vers article 2 -->
+          <div class="crosslink-block">
+            <p>
+              Tu viens de signer un bail de colocation&nbsp;? Vérifie ce que ton contrat implique,
+              surtout la clause de solidarité sur les charges. Elle peut vraiment alourdir
+              ton budget mensuel.&nbsp;→&nbsp;
+              <a href="#article-logement">
+                Colocation en 2025&nbsp;: ce qu'il faut vérifier avant de signer
+              </a>
+            </p>
+          </div>
+
+          <!-- SEO -->
+          <div class="seo-block">
+            <p class="seo-block__label">Mots-clés SEO</p>
+            <p class="seo-block__main">Covoiturage domicile-travail</p>
+            <p class="seo-block__tags">
+              BlaBlaCar Daily · Covoiturage économies · Forfait mobilités durables · Alternative transport commun
+            </p>
+          </div>
+
+          <!-- Sources -->
+          <p class="sources">
+            Sources&nbsp;: Ministère de la Transition écologique, Observatoire national du covoiturage
+            au quotidien, sondage Alphabet 2024, TotalEnergies Mobility Business (mars 2025),
+            BlaBlaCar Daily (oct. 2024).
+          </p>
+
+        </div><!-- /article-body -->
+
+      </article><!-- /article-transport -->
+
+      <!-- Navigation vers article suivant -->
+      <div class="article-nav">
+        <a href="#article-logement">Article suivant&nbsp;: Colocation en 2025 →</a>
+      </div>
+
+    </div><!-- /page-container -->
+
+
+    <!-- Séparateur entre les deux articles -->
+    <hr class="article-separator">
+
+
+    <!-- ============================================================
+         ARTICLE 2 — LOGEMENT
+         /logement/colocation-bail-vérifications
+    ============================================================ -->
+    <div class="page-container">
+      <article id="article-logement" class="article-wrapper">
+
+        <!-- Rubrique -->
+        <a href="#" class="rubrique rubrique--logement">Logement</a>
+
+        <!-- H1 -->
+        <h1 class="article-title">
+          Colocation en 2025&nbsp;: ce qu'il faut vérifier avant de signer
+        </h1>
+
+        <!-- Chapeau -->
+        <p class="article-lead">
+          Le loyer moyen d'une chambre en colocation a grimpé à 508&nbsp;€ en 2025. Pour que ce bon
+          plan ne vire pas au cauchemar, prends dix minutes pour lire ce bail avant de signer.
+          Ce que tu rates peut te coûter des mois de loyer.
+        </p>
+
+        <!-- Méta-ligne -->
+        <div class="meta-line">
+          <div class="meta-line__left">
+            <div class="meta-avatar meta-avatar--logement">S</div>
+            <div>
+              <a href="#" class="meta-author">Sophie Martin</a>
+              <div class="meta-details">
+                <time datetime="2025-05-14">14 mai 2025</time>
+                &nbsp;·&nbsp; 5 min de lecture
+              </div>
+            </div>
+          </div>
+          <button class="btn-pill">🔖 Lire plus tard</button>
+        </div>
+
+        <!-- Image hero -->
+        <div class="hero-image-wrapper">
+          <img
+            src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=1200&q=80"
+            alt="Un appartement partagé lumineux avec un salon commun propre et des colocataires discutant"
+            class="hero-image"
+            width="1200"
+            height="675"
+          >
+        </div>
+        <p class="image-caption">
+          Photo&nbsp;: Francesca Tosolini / Unsplash — Un bail de colocation bien vérifié, c'est des mois de tranquillité garantis.
+        </p>
+
+        <!-- Corps de l'article -->
+        <div class="article-body">
+
+          <!-- Chiffres clés -->
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-number">508&nbsp;€</span>
+              <span class="stat-label">loyer moyen chambre/mois en 2025</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">+6,7&nbsp;%</span>
+              <span class="stat-label">hausse des loyers coloc en 1 an</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">43&nbsp;%</span>
+              <span class="stat-label">des colocataires sont jeunes actifs</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">30&nbsp;%</span>
+              <span class="stat-label">de charges en moins vs location classique</span>
+            </div>
+          </div>
+
+          <!-- Section 1 -->
+          <h2>Repère la clause de solidarité avant tout</h2>
+
+          <p>
+            Dans un bail unique, tous les colocataires signent le même contrat. Si une
+            <strong>clause de solidarité</strong> est présente, chaque colocataire doit payer
+            <strong>l'intégralité du loyer</strong>. Cela reste vrai même si c'est un autre
+            colocataire qui ne paie pas. <em>Vérifie cette clause ligne par ligne avant de signer.</em>
+          </p>
+
+          <p>
+            Un autre point souvent négligé&nbsp;: si un colocataire part, tu peux être responsable
+            <strong>six mois après la fin de son préavis</strong>. Anticipe le remplacement
+            dès le préavis envoyé.
+          </p>
+
+          <!-- Section 2 -->
+          <h2>Exige les 6 annexes obligatoires</h2>
+
+          <p>La loi exige six documents pour le bail&nbsp;:</p>
+
+          <ul>
+            <li><strong>DPE</strong> (diagnostic de performance énergétique)</li>
+            <li>État des risques et pollutions</li>
+            <li>CREP plomb (pour les logements d'avant 1949)</li>
+            <li>Diagnostic amiante (pour ceux d'avant 1997)</li>
+            <li>Notice d'information loi Alur</li>
+            <li>État des lieux d'entrée</li>
+          </ul>
+
+          <p>
+            S'il en manque un, le bailleur ne peut pas t'imposer toutes ses conditions. Vérifie
+            aussi la note DPE&nbsp;: <strong>depuis le 1er janvier 2025, louer un logement classé G
+            est interdit.</strong>
+          </p>
+
+          <p>
+            Pour le dépôt de garantie&nbsp;: <strong>un mois de loyer hors charges maximum</strong>
+            en logement non meublé, <strong>deux mois en meublé</strong>. Si on te demande plus,
+            c'est illégal.
+          </p>
+
+          <!-- Section 3 -->
+          <h2>Demande ta part d'APL dès le premier mois</h2>
+
+          <p>
+            Chaque colocataire fait sa demande d'<strong>APL</strong> individuellement auprès de
+            la CAF, même en bail unique. <em>N'attends pas&nbsp;: les aides ne sont pas rétroactives.</em>
+            Si tu es en alternance, tu peux cumuler avec la <strong>Mobili-Jeune</strong>
+            d'Action Logement. Si tu n'as pas de garant familial, pense à la <strong>garantie
+            Visale</strong>. En 2025, 14&nbsp;% des colocataires l'ont utilisée. C'est gratuit et
+            tous les propriétaires l'acceptent.
+          </p>
+
+          <!-- Hyperlien vers article 1 -->
+          <div class="crosslink-block">
+            <p>
+              Tu veux réduire ta facture mensuelle&nbsp;? Le covoiturage domicile-travail peut aussi
+              te faire économiser 83 à 150&nbsp;€ par mois. Combiné à une coloc bien gérée,
+              l'économie devient sérieuse.&nbsp;→&nbsp;
+              <a href="#article-transport">
+                Covoiturage domicile-travail&nbsp;: économisez jusqu'à 150&nbsp;€ par mois
+              </a>
+            </p>
+          </div>
+
+          <!-- SEO -->
+          <div class="seo-block">
+            <p class="seo-block__label">Mots-clés SEO</p>
+            <p class="seo-block__main">Colocation contrat vérification</p>
+            <p class="seo-block__tags">
+              Bail colocation · Droits locataire · Charges coloc · Caution logement
+            </p>
+          </div>
+
+          <!-- Sources -->
+          <p class="sources">
+            Sources&nbsp;: LocService.fr 2025, Baromètre OQORO 2025, Service-Public.fr (màj mars 2025),
+            CIDJ, INC-CONSO/AFOC, jelouebien.com (2026), faireplace.com,
+            Loi Alur (2014) &amp; Loi Climat et Résilience (2021).
+          </p>
+
+        </div><!-- /article-body -->
+
+      </article><!-- /article-logement -->
+
+      <!-- Navigation vers article précédent -->
+      <div class="article-nav article-nav--prev">
+        <a href="#article-transport">← Article précédent&nbsp;: Covoiturage domicile-travail</a>
+      </div>
+
+    </div><!-- /page-container -->
+
+  </main>
+
+
+  <!-- ============================================================
+       FOOTER DU SITE
+  ============================================================ -->
+  <footer class="site-footer">
+    <div class="page-container">
+      <p>© 2025 La Ville Mode d'Emploi — Guide pratique pour jeunes actifs en ville</p>
+    </div>
+  </footer>
+
+</body>
+</html>
